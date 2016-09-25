@@ -5,6 +5,7 @@
     <NoStdLib>true</NoStdLib>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,15 +38,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Elements\Gameboard.cs" />
+    <Compile Include="Elements\GameElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bridge\output\readme.txt" />
     <Content Include="Bridge\www\demo.html" />
+    <Content Include="Bridge\www\style.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Bridge\bridge.json" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge, Version=15.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -56,6 +61,7 @@
       <HintPath>..\packages\Bridge.Html5.15.1.0\lib\net40\Bridge.Html5.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Bridge.Min.15.1.0\build\Bridge.Min.targets" Condition="Exists('..\packages\Bridge.Min.15.1.0\build\Bridge.Min.targets')" />

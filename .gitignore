@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/BridgeBreakout/Bridge/output/bridgeBreakout.min.js
+/BridgeBreakout/Bridge/output/bridgeBreakout.js
+/BridgeBreakout/Bridge/output/bridge.min.js
+/BridgeBreakout/Bridge/output/bridge.js
+/BridgeBreakout/BridgeBreakout.csproj.DotSettings
