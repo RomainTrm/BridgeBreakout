@@ -1,6 +1,4 @@
-﻿using System;
-using Bridge.Html5;
-using Console = Bridge.Utils.Console;
+﻿using Bridge.Html5;
 
 namespace BridgeBreakout
 {
@@ -20,16 +18,19 @@ namespace BridgeBreakout
             set { this.Div.Style.Width = value + "px"; }
         }
 
+        public Node Node
+        {
+            get { return (Node) this.Div; }
+        }
+
         protected GameElement(string elementId)
         {
             this.Div = Document.GetElementById<HTMLDivElement>(elementId);
+        }
 
-            if (this.Div == null)
-            {
-                var errorMessage = string.Format("Div {0} not found !", elementId);
-                Console.Error(errorMessage);
-                throw new ArgumentNullException(errorMessage);
-            }
+        public GameElement(HTMLDivElement divElement)
+        {
+            this.Div = divElement;
         }
     }
 }
