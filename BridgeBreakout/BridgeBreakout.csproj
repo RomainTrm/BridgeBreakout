@@ -40,6 +40,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Elements\Gameboard.cs" />
     <Compile Include="Elements\GameElement.cs" />
+    <Compile Include="Elements\Tray.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

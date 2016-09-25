@@ -1,6 +1,4 @@
-﻿using System;
-using Bridge.Html5;
-using Console = Bridge.Utils.Console;
+﻿using Bridge.Html5;
 
 namespace BridgeBreakout
 {
@@ -9,14 +7,7 @@ namespace BridgeBreakout
         [Ready]
         public static void Main()
         {
-            try
-            {
-                var gameBoard = new Gameboard();
-            }
-            catch (Exception exception)
-            {
-                Console.Error(exception.Message);
-            }
+            var gameBoard = new Gameboard();
         }
     }
 }

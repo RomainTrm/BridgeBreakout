@@ -19,21 +19,4 @@ namespace BridgeBreakout
             set { ((HTMLElement)this.Div).OnMouseMove = value; }
         }
     }
-
-    public class Tray : GameElement
-    {
-        private readonly Gameboard gameboard;
-
-        public Tray(Gameboard gameboard) 
-            : base("tray")
-        {
-            this.gameboard = gameboard;
-            this.gameboard.OnMouseMove += this.Move;
-        }
-
-        private void Move(MouseEvent mouseEvent)
-        {
-            this.Left = Math.Min(this.gameboard.Width - this.Width, mouseEvent.ClientX);
-        }
-    }
 }
