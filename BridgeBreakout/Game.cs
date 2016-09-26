@@ -16,7 +16,7 @@ namespace BridgeBreakout
             this.tray = new Tray(this.gameBoard);
             this.ball = new Ball();
 
-            this.collisionManager = new CollisionManager(this.gameBoard, this.ball, this.tray, this.gameBoard.Bricks);
+            this.collisionManager = new CollisionManager(this.gameBoard, this.ball, this.tray);
         }
 
         public void Run()
@@ -32,6 +32,7 @@ namespace BridgeBreakout
             this.ball.Move();
             var collision = this.collisionManager.GetCollision();
             this.ball.Bounce(collision);
+            this.gameBoard.RemoveCollideBrick(this.collisionManager.GetCollideBrick());
             this.EndGame(collision);
         }
 

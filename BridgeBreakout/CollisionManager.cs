@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 
 namespace BridgeBreakout
 {
@@ -7,14 +7,12 @@ namespace BridgeBreakout
         private readonly Gameboard gameboard;
         private readonly Ball ball;
         private readonly Tray tray;
-        private readonly List<Brick> bricks;
 
-        public CollisionManager(Gameboard gameboard, Ball ball, Tray tray, List<Brick> bricks)
+        public CollisionManager(Gameboard gameboard, Ball ball, Tray tray)
         {
             this.gameboard = gameboard;
             this.ball = ball;
             this.tray = tray;
-            this.bricks = bricks;
         }
 
         public Collisions GetCollision()
@@ -33,20 +31,22 @@ namespace BridgeBreakout
                 return Collisions.Left;
             if (this.BallTouchRight())
                 return Collisions.Right;
+            if (this.BallTouchBrick())
+                return Collisions.Brick;
 
             return Collisions.None;
         }
 
         private bool BallTouchTrayOnLeft()
         {
-            return this.ball.Bottom >= this.tray.Top 
+            return this.ball.Bottom >= this.tray.Top
                 && this.ball.Left >= this.tray.Left
                 && this.ball.Right <= this.tray.Left + this.tray.Width / 3;
         }
 
         private bool BallTouchTrayOnRight()
         {
-            return this.ball.Bottom >= this.tray.Top 
+            return this.ball.Bottom >= this.tray.Top
                 && this.ball.Left >= this.tray.Right - this.tray.Width / 3
                 && this.ball.Right <= this.tray.Right;
         }
@@ -54,13 +54,13 @@ namespace BridgeBreakout
         private bool BallTouchTrayOnMiddle()
         {
             return this.ball.Bottom >= this.tray.Top
-                && this.ball.Left >= this.tray.Left + this.tray.Width/3
-                && this.ball.Right <= this.tray.Right - this.tray.Width/3;
+                && this.ball.Left >= this.tray.Left
+                && this.ball.Right <= this.tray.Right;
         }
 
         private bool BallTouchTop()
         {
-            return this.ball.Top == this.gameboard.Top;
+            return this.ball.Top <= this.gameboard.Top;
         }
 
         private bool BallTouchBottom()
@@ -76,6 +76,32 @@ namespace BridgeBreakout
         private bool BallTouchRight()
         {
             return this.ball.Right == this.gameboard.Right;
+        }
+
+        private bool BallTouchBrick()
+        {
+            return this.GetCollideBrick() != null;
+        }
+
+        public Brick GetCollideBrick()
+        {
+            return this.gameboard.Bricks.FirstOrDefault(brick => this.BallCollideVertically(brick) && this.BallCollideHorizontally(brick));
+        }
+
+        private bool BallCollideVertically(Brick brick)
+        {
+            return this.ball.Bottom >= brick.Top
+                && this.ball.Bottom < brick.Bottom
+                || this.ball.Top <= brick.Bottom
+                && this.ball.Top > brick.Top;
+        }
+
+        private bool BallCollideHorizontally(Brick brick)
+        {
+            return this.ball.Right >= brick.Left
+                && this.ball.Right < brick.Right
+                || this.ball.Left <= brick.Right
+                && this.ball.Left > brick.Left;
         }
     }
 }

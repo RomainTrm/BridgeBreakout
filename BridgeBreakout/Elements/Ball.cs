@@ -70,6 +70,15 @@ namespace BridgeBreakout
                     this.horizontalDirection = HorizontalDirection.Left;
                     break;
                 case Collisions.Brick:
+                    this.verticalDirection = this.verticalDirection == VerticalDirection.Up
+                        ? VerticalDirection.Down
+                        : VerticalDirection.Up;
+                    //if (this.horizontalDirection != HorizontalDirection.None)
+                    //{
+                    //    this.horizontalDirection = this.horizontalDirection == HorizontalDirection.Left
+                    //        ? HorizontalDirection.Right
+                    //        : HorizontalDirection.Left;
+                    //}
                     break;
             }
         }
