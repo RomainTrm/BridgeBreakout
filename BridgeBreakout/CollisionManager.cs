@@ -16,5 +16,45 @@ namespace BridgeBreakout
             this.tray = tray;
             this.bricks = bricks;
         }
+
+        public Collisions GetCollision()
+        {
+            if (this.BallTouchTrayOnLeft())
+                return Collisions.TrayLeft;
+            if (this.BallTouchTrayOnRight())
+                return Collisions.TrayRight;
+            if (this.BallTouchTrayOnMiddle())
+                return Collisions.TrayMiddle;
+            if (this.BallTouchBottom())
+                return Collisions.Bottom;
+
+            return Collisions.None;
+        }
+
+        private bool BallTouchTrayOnLeft()
+        {
+            return this.ball.Bottom == this.tray.Top 
+                && this.ball.Left >= this.tray.Left
+                && this.ball.Right <= this.tray.Left + this.tray.Width / 3;
+        }
+
+        private bool BallTouchTrayOnRight()
+        {
+            return this.ball.Bottom == this.tray.Top 
+                && this.ball.Left >= this.tray.Right - this.tray.Width / 3
+                && this.ball.Right <= this.tray.Right;
+        }
+
+        private bool BallTouchTrayOnMiddle()
+        {
+            return this.ball.Bottom == this.tray.Top
+                && this.ball.Left >= this.tray.Left + this.tray.Width/3
+                && this.ball.Right <= this.tray.Right - this.tray.Width/3;
+        }
+
+        private bool BallTouchBottom()
+        {
+            return this.ball.Bottom >= this.gameboard.Bottom;
+        }
     }
 }

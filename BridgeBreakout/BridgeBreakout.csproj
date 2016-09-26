@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Collisions.cs" />
     <Compile Include="Elements\Ball.cs" />
     <Compile Include="Elements\BallDirections.cs" />
     <Compile Include="Elements\Brick.cs" />

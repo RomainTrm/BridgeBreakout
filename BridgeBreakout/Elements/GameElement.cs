@@ -18,6 +18,10 @@ namespace BridgeBreakout
             protected set { this.Div.Style.Top = value + "px"; }
         }
 
+        public int Bottom => this.Top + this.Height;
+
+        public int Right => this.Left + this.Width;
+
         public int Width => this.Div.OffsetWidth;
 
         public int Height => this.Div.OffsetHeight;

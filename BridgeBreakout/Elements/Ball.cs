@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BridgeBreakout
+﻿namespace BridgeBreakout
 {
     public class Ball : GameElement
     {
@@ -11,47 +9,59 @@ namespace BridgeBreakout
         {
         }
 
-        public BallDirections Direction
+        public void Move()
         {
-            set { this.direction = value; }
+            this.MoveVertically();
+            this.MoveHorizontally();
         }
 
-        public void Move()
+        private void MoveVertically()
         {
             switch (this.direction)
             {
                 case BallDirections.Down:
-                    this.Top++;
-                    break;
                 case BallDirections.DownLeft:
-                    this.Top++;
-                    this.Left--;
-                    break;
-                case BallDirections.Left:
-                    this.Left--;
-                    break;
-                case BallDirections.TopLeft:
-                    this.Top--;
-                    this.Left--;
-                    break;
-                case BallDirections.Top:
-                    this.Top--;
-                    this.Left++;
-                    break;
-                case BallDirections.TopRight:
-                    this.Top--;
-                    this.Left++;
-                    break;
-                case BallDirections.Right:
-                    this.Left++;
-                    break;
                 case BallDirections.DownRight:
                     this.Top++;
+                    break;
+                case BallDirections.TopLeft:
+                case BallDirections.Top:
+                case BallDirections.TopRight:
+                    this.Top--;
+                    break;
+            }
+        }
+
+        private void MoveHorizontally()
+        {
+            switch (this.direction)
+            {
+                case BallDirections.DownLeft:
+                case BallDirections.Left:
+                case BallDirections.TopLeft:
+                    this.Left--;
+                    break;
+                case BallDirections.TopRight:
+                case BallDirections.Right:
+                case BallDirections.DownRight:
                     this.Left++;
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void Bounce()
+        {
+            this.direction = BallDirections.Top;
+        }
+
+        public void BounceLeft()
+        {
+            this.direction = BallDirections.TopLeft;
+        }
+
+        public void BounceRight()
+        {
+            this.direction = BallDirections.TopRight;
         }
     }
 }
