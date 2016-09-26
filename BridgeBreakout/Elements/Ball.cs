@@ -1,8 +1,11 @@
-﻿namespace BridgeBreakout
+﻿using System;
+
+namespace BridgeBreakout
 {
     public class Ball : GameElement
     {
-        private BallDirections direction = BallDirections.Down;
+        private VerticalDirection verticalDirection = VerticalDirection.Down;
+        private HorizontalDirection horizontalDirection = HorizontalDirection.None;
 
         public Ball() 
             : base("ball")
@@ -17,51 +20,58 @@
 
         private void MoveVertically()
         {
-            switch (this.direction)
+            switch (this.verticalDirection)
             {
-                case BallDirections.Down:
-                case BallDirections.DownLeft:
-                case BallDirections.DownRight:
-                    this.Top++;
-                    break;
-                case BallDirections.TopLeft:
-                case BallDirections.Top:
-                case BallDirections.TopRight:
+                case VerticalDirection.Up:
                     this.Top--;
+                    break;
+                case VerticalDirection.Down:
+                    this.Top++;
                     break;
             }
         }
 
         private void MoveHorizontally()
         {
-            switch (this.direction)
+            switch (this.horizontalDirection)
             {
-                case BallDirections.DownLeft:
-                case BallDirections.Left:
-                case BallDirections.TopLeft:
+                case HorizontalDirection.Left:
                     this.Left--;
                     break;
-                case BallDirections.TopRight:
-                case BallDirections.Right:
-                case BallDirections.DownRight:
+                case HorizontalDirection.Right:
                     this.Left++;
                     break;
             }
         }
 
-        public void Bounce()
+        public void Bounce(Collisions collision)
         {
-            this.direction = BallDirections.Top;
-        }
-
-        public void BounceLeft()
-        {
-            this.direction = BallDirections.TopLeft;
-        }
-
-        public void BounceRight()
-        {
-            this.direction = BallDirections.TopRight;
+            switch (collision)
+            {
+                case Collisions.TrayMiddle:
+                    this.horizontalDirection = HorizontalDirection.None;
+                    this.verticalDirection = VerticalDirection.Up;
+                    break;
+                case Collisions.TrayLeft:
+                    this.verticalDirection = VerticalDirection.Up;
+                    this.horizontalDirection = HorizontalDirection.Left;
+                    break;
+                case Collisions.TrayRight:
+                    this.verticalDirection = VerticalDirection.Up;
+                    this.horizontalDirection = HorizontalDirection.Right;
+                    break;
+                case Collisions.Top:
+                    this.verticalDirection = VerticalDirection.Down;
+                    break;
+                case Collisions.Left:
+                    this.horizontalDirection = HorizontalDirection.Right;
+                    break;
+                case Collisions.Right:
+                    this.horizontalDirection = HorizontalDirection.Left;
+                    break;
+                case Collisions.Brick:
+                    break;
+            }
         }
     }
 }

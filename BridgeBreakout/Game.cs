@@ -31,25 +31,8 @@ namespace BridgeBreakout
         {
             this.ball.Move();
             var collision = this.collisionManager.GetCollision();
-            this.ChangeBallDirection(collision);
-
+            this.ball.Bounce(collision);
             this.EndGame(collision);
-        }
-
-        private void ChangeBallDirection(Collisions collision)
-        {
-            switch (collision)
-            {
-                case Collisions.TrayMiddle:
-                    this.ball.Bounce();
-                    break;
-                case Collisions.TrayLeft:
-                    this.ball.BounceLeft();
-                    break;
-                case Collisions.TrayRight:
-                    this.ball.BounceRight();
-                    break;
-            }
         }
 
         private void EndGame(Collisions collision)
