@@ -2,33 +2,34 @@
 
 namespace BridgeBreakout
 {
-    public class GameElement
+    public abstract class GameElement
     {
         protected readonly HTMLDivElement Div;
 
         public int Left
         {
             get { return this.Div.OffsetLeft; }
-            set { this.Div.Style.Left = value + "px"; }
+            protected set { this.Div.Style.Left = value + "px"; }
         }
 
-        public int Width
+        public int Top
         {
-            get { return this.Div.OffsetWidth; }
-            set { this.Div.Style.Width = value + "px"; }
+            get { return this.Div.OffsetTop; }
+            protected set { this.Div.Style.Top = value + "px"; }
         }
 
-        public Node Node
-        {
-            get { return (Node) this.Div; }
-        }
+        public int Width => this.Div.OffsetWidth;
+
+        public int Height => this.Div.OffsetHeight;
+
+        public Node Node => this.Div;
 
         protected GameElement(string elementId)
         {
             this.Div = Document.GetElementById<HTMLDivElement>(elementId);
         }
 
-        public GameElement(HTMLDivElement divElement)
+        protected GameElement(HTMLDivElement divElement)
         {
             this.Div = divElement;
         }

@@ -4,6 +4,9 @@ namespace BridgeBreakout
 {
     public class Brick : GameElement
     {
+        public static int Width => 10;
+        public static int Height => 10;
+
         public Brick(int left, int top)
             : base(CreateDivElement(left, top))
         {

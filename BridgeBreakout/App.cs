@@ -7,7 +7,9 @@ namespace BridgeBreakout
         [Ready]
         public static void Main()
         {
-            var gameBoard = new Gameboard();
+            var game = new Game();
+            game.Run();
+            
         }
     }
 }

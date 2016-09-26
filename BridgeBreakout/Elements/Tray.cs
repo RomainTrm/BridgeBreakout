@@ -5,18 +5,18 @@ namespace BridgeBreakout
 {
     public class Tray : GameElement
     {
-        private readonly Gameboard gameboard;
+        private readonly IGameSpace gamespace;
 
-        public Tray(Gameboard gameboard) 
+        public Tray(IGameSpace gamespace) 
             : base("tray")
         {
-            this.gameboard = gameboard;
-            this.gameboard.OnMouseMove += this.Move;
+            this.gamespace = gamespace;
+            this.gamespace.OnMouseMove += this.Move;
         }
 
         private void Move(MouseEvent mouseEvent)
         {
-            this.Left = Math.Min(this.gameboard.Width - this.Width, mouseEvent.ClientX);
+            this.Left = Math.Min(this.gamespace.Width - this.Width, mouseEvent.ClientX);
         }
     }
 }
