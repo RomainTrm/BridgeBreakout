@@ -9,6 +9,7 @@ namespace BridgeBreakout
         private readonly Ball ball;
         private readonly CollisionManager collisionManager;
         private readonly Lives lives;
+        private readonly Score score;
 
         public Game()
         {
@@ -16,6 +17,7 @@ namespace BridgeBreakout
             var tray = new Tray(this.gameBoard);
             this.ball = new Ball();
             this.lives = new Lives();
+            this.score = new Score();
 
             this.collisionManager = new CollisionManager(this.gameBoard, this.ball, tray);
         }
@@ -33,7 +35,12 @@ namespace BridgeBreakout
             this.ball.Move();
             var collision = this.collisionManager.GetCollision();
             this.ball.Bounce(collision);
-            this.gameBoard.RemoveCollideBrick(this.collisionManager.GetCollideBrick());
+            var collideBrick = this.collisionManager.GetCollideBrick();
+            if (collideBrick != null)
+            {
+                this.score.Increment();
+                this.gameBoard.RemoveCollideBrick(collideBrick);
+            }
             this.EndGame(collision);
         }
 

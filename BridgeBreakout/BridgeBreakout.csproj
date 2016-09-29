@@ -41,6 +41,7 @@
     <Compile Include="Collisions.cs" />
     <Compile Include="Elements\Ball.cs" />
     <Compile Include="Elements\Lives.cs" />
+    <Compile Include="Elements\Score.cs" />
     <Compile Include="Elements\VerticalDirection.cs" />
     <Compile Include="Elements\Brick.cs" />
     <Compile Include="CollisionManager.cs" />
@@ -54,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bridge\output\readme.txt" />
-    <Content Include="Bridge\www\demo.html" />
+    <Content Include="Bridge\www\breakout.html" />
     <Content Include="Bridge\www\style.css" />
   </ItemGroup>
   <ItemGroup>

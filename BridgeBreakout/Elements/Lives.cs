@@ -17,8 +17,7 @@
 
         public void RemoveOneLife()
         {
-            this.remaining--;
-            this.Div.InnerHTML = "Lives : " + this.remaining;
+            this.Div.InnerHTML = "Lives : " + --this.remaining;
         }
     }
 }
