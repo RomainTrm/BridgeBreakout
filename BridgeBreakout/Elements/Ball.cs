@@ -7,7 +7,7 @@ namespace BridgeBreakout
         private VerticalDirection verticalDirection = VerticalDirection.Down;
         private HorizontalDirection horizontalDirection = HorizontalDirection.None;
 
-        public Ball() 
+        public Ball()
             : base("ball")
         {
         }
@@ -69,16 +69,18 @@ namespace BridgeBreakout
                 case Collisions.Right:
                     this.horizontalDirection = HorizontalDirection.Left;
                     break;
-                case Collisions.Brick:
+                case Collisions.BrickTopBottom:
                     this.verticalDirection = this.verticalDirection == VerticalDirection.Up
                         ? VerticalDirection.Down
                         : VerticalDirection.Up;
-                    //if (this.horizontalDirection != HorizontalDirection.None)
-                    //{
-                    //    this.horizontalDirection = this.horizontalDirection == HorizontalDirection.Left
-                    //        ? HorizontalDirection.Right
-                    //        : HorizontalDirection.Left;
-                    //}
+                    break;
+                case Collisions.BrickLeftRight:
+                    if (this.horizontalDirection != HorizontalDirection.None)
+                    {
+                        this.horizontalDirection = this.horizontalDirection == HorizontalDirection.Left
+                            ? HorizontalDirection.Right
+                            : HorizontalDirection.Left;
+                    }
                     break;
             }
         }

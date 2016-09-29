@@ -10,6 +10,7 @@ namespace BridgeBreakout
         Left, 
         Bottom,
         Right,
-        Brick
+        BrickLeftRight,
+        BrickTopBottom,
     }
 }

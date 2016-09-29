@@ -27,8 +27,8 @@ namespace BridgeBreakout
         private IEnumerable<Brick> GenerateBricks()
         {
             for (var row = 0; row < 5; row++)
-                for (var column = 0; column < 50; column++)
-                    yield return new Brick(column * (Brick.Width + 1), 50 + row * (Brick.Height + 1));
+                for (var column = 0; column < 55; column++)
+                    yield return new Brick(column * Brick.Width, 40 + row * Brick.Height);
         }
 
         public void RemoveCollideBrick(Brick brick)

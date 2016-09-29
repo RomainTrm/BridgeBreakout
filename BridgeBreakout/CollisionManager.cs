@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BridgeBreakout
 {
@@ -32,7 +34,9 @@ namespace BridgeBreakout
             if (this.BallTouchRight())
                 return Collisions.Right;
             if (this.BallTouchBrick())
-                return Collisions.Brick;
+            {
+                return this.GetBrickCollision();
+            }
 
             return Collisions.None;
         }
@@ -85,23 +89,66 @@ namespace BridgeBreakout
 
         public Brick GetCollideBrick()
         {
-            return this.gameboard.Bricks.FirstOrDefault(brick => this.BallCollideVertically(brick) && this.BallCollideHorizontally(brick));
+            return this.gameboard
+                .Bricks
+                .Where(brick => this.BallCollideVertically(brick) && this.BallCollideHorizontally(brick))
+                .OrderBy(brick => this.GetBricksDeltas(brick).Max(delta => delta.Key))
+                .FirstOrDefault();
         }
 
         private bool BallCollideVertically(Brick brick)
         {
             return this.ball.Bottom >= brick.Top
-                && this.ball.Bottom < brick.Bottom
+                && this.ball.Bottom <= brick.Bottom
                 || this.ball.Top <= brick.Bottom
-                && this.ball.Top > brick.Top;
+                && this.ball.Top >= brick.Top;
         }
 
         private bool BallCollideHorizontally(Brick brick)
         {
             return this.ball.Right >= brick.Left
-                && this.ball.Right < brick.Right
+                && this.ball.Right <= brick.Right
                 || this.ball.Left <= brick.Right
-                && this.ball.Left > brick.Left;
+                && this.ball.Left >= brick.Left;
+        }
+
+        private IEnumerable<KeyValuePair<int, Sides>> GetBricksDeltas(Brick brick)
+        {
+            return new List<KeyValuePair<int, Sides>>
+            {
+                new KeyValuePair<int, Sides>(brick.Left - this.ball.Left, Sides.Left),
+                new KeyValuePair<int, Sides>(this.ball.Right - brick.Right, Sides.Right),
+                new KeyValuePair<int, Sides>(brick.Top - this.ball.Top, Sides.Top),
+                new KeyValuePair<int, Sides>(this.ball.Bottom - brick.Bottom, Sides.Bottom)
+            };
+        }
+
+        private Collisions GetBrickCollision()
+        {
+            var brick = this.GetCollideBrick();
+            var sidesDeltas = this.GetBricksDeltas(brick);
+
+            var biggestDelta = sidesDeltas
+                .OrderByDescending(x => x.Key)
+                .ThenBy(x => x.Value)
+                .First().Value;
+
+            switch (biggestDelta)
+            {
+                case Sides.Top:
+                case Sides.Bottom:
+                    return Collisions.BrickTopBottom;
+                case Sides.Right:
+                case Sides.Left:
+                    return Collisions.BrickLeftRight;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        private enum Sides
+        {
+            Top, Bottom, Right, Left
         }
     }
 }
