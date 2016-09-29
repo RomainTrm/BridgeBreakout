@@ -40,6 +40,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Collisions.cs" />
     <Compile Include="Elements\Ball.cs" />
+    <Compile Include="Elements\Lives.cs" />
     <Compile Include="Elements\VerticalDirection.cs" />
     <Compile Include="Elements\Brick.cs" />
     <Compile Include="CollisionManager.cs" />

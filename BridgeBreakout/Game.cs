@@ -6,17 +6,18 @@ namespace BridgeBreakout
     {
         private int interval;
         private readonly Gameboard gameBoard;
-        private readonly Tray tray;
         private readonly Ball ball;
         private readonly CollisionManager collisionManager;
+        private readonly Lives lives;
 
         public Game()
         {
             this.gameBoard = new Gameboard();
-            this.tray = new Tray(this.gameBoard);
+            var tray = new Tray(this.gameBoard);
             this.ball = new Ball();
+            this.lives = new Lives();
 
-            this.collisionManager = new CollisionManager(this.gameBoard, this.ball, this.tray);
+            this.collisionManager = new CollisionManager(this.gameBoard, this.ball, tray);
         }
 
         public void Run()
@@ -40,6 +41,7 @@ namespace BridgeBreakout
         {
             if (collision == Collisions.Bottom)
             {
+                this.lives.RemoveOneLife();
                 Window.ClearInterval(this.interval);
             }
         }

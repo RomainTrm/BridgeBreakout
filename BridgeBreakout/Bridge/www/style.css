@@ -26,6 +26,14 @@
     background: white;
 }
 
+#lives {
+    text-align: left;
+    color: white;
+    display: inline;
+    top: 10px;
+    left: 450px;
+}
+
 .brick {
     width: 9px;
     height: 9px;
