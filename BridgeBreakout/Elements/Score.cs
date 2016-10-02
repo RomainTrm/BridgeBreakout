@@ -2,7 +2,7 @@
 {
     public class Score : GameElement
     {
-        private int score = 0;
+        private int score;
 
         public Score()
             : base("score")

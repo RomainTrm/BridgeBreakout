@@ -27,18 +27,20 @@
 }
 
 #lives {
+    vertical-align: top;
     text-align: left;
     color: white;
-    display: inline;
-    margin: 30px;
+    margin-left: 30px;
+    position: absolute;
 }
 
 #score {
+    vertical-align: top;
+    margin-right: 30px;
     left: 450px;
-    position:absolute;
     text-align: right;
     color: white;
-    display: inline;
+    position: absolute;
 }
 
 .brick {
@@ -46,4 +48,11 @@
     height: 9px;
     position: absolute;
     background: white;
+}
+
+#gameover {
+    text-align: center;
+    position: relative;
+    color: white;
+    top: 150px;
 }

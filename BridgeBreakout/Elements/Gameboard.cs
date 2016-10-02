@@ -22,6 +22,12 @@ namespace BridgeBreakout
             set { ((HTMLElement)this.Div).OnMouseMove = value; }
         }
 
+        public Action<MouseEvent> OnMouseClick
+        {
+            get { return ((HTMLElement) this.Div).OnClick; }
+            set { ((HTMLElement)this.Div).OnClick = value; }
+        }
+
         public IEnumerable<Brick> Bricks => this.bricks;
 
         private IEnumerable<Brick> GenerateBricks()

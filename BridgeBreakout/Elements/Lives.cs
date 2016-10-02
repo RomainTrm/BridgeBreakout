@@ -10,10 +10,7 @@
             this.Div.InnerHTML = "Lives : " + this.remaining;
         }
 
-        public int Remaining
-        {
-            get { return this.remaining; }
-        }
+        public int Remaining => this.remaining;
 
         public void RemoveOneLife()
         {

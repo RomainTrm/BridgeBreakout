@@ -1,15 +1,18 @@
-﻿using System;
-
-namespace BridgeBreakout
+﻿namespace BridgeBreakout
 {
     public class Ball : GameElement
     {
+        private readonly int originLeft;
+        private readonly int originTop;
+
         private VerticalDirection verticalDirection = VerticalDirection.Down;
         private HorizontalDirection horizontalDirection = HorizontalDirection.None;
-
+    
         public Ball()
             : base("ball")
         {
+            this.originLeft = this.Left;
+            this.originTop = this.Top;
         }
 
         public void Move()
@@ -83,6 +86,14 @@ namespace BridgeBreakout
                     }
                     break;
             }
+        }
+
+        public void ResetPosition()
+        {
+            this.Left = this.originLeft;
+            this.Top = this.originTop;
+            this.horizontalDirection = HorizontalDirection.None;
+            this.verticalDirection = VerticalDirection.Down;
         }
     }
 }
